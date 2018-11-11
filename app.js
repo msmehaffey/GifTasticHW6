@@ -12,17 +12,40 @@ var quarterBacks = ["Cam Newton", "Tom Brady", "Aaron Rodgers", "Drew Brees"];
             console.log(response.data);
 
           for (var i = 0; i < response.data.length; i++){
-          var gifUrl = response.data[i].images.fixed_height.url;
+          var gifUrlStill = response.data[i].images.fixed_height_still.url;
+          var gifUrlAnimate = response.data[i].images.fixed_height.url;
+          var p = $("<p>")
+
+          var rating = response.data[i].rating
+          p.text("Rating: " + rating)
 
           
           var gifImage = $("<img>");
 
-          gifImage.attr("src", gifUrl);
+          gifImage.addClass("gif")
+
+          gifImage.attr("src", gifUrlStill);
           gifImage.attr("alt", "QB Gifs");
+          gifImage.attr("data-still", gifUrlStill);
+          gifImage.attr("data-animate", gifUrlAnimate);
+          gifImage.attr("data-state", "still");
 
-          $("#player-view").append(gifImage); 
+          $("#player-view").append(gifImage, p); 
+          };
 
-          }});
+          $(".gif").on("click", function() {
+  
+            var state = $(this).attr("data-state")
+      
+            if (state === "still") {
+              $(this).attr("src", $(this).attr("data-animate"))
+              $(this).attr("data-state", "animate")
+            } else {
+              $(this).attr("src", $(this).attr("data-still"))
+              $(this).attr("data-state", "still")
+            }});
+
+          });
         };
       
 
@@ -50,6 +73,7 @@ var quarterBacks = ["Cam Newton", "Tom Brady", "Aaron Rodgers", "Drew Brees"];
 
         renderButtons();
       });
+
 
       $(document).on("click", ".player", displayPlayers);
 
