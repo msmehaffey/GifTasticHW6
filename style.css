@@ -4,3 +4,7 @@ button,
     input {
       margin: 10px;
     }
+
+body {
+  background-color: tan;
+}

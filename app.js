@@ -57,6 +57,7 @@ var quarterBacks = ["Cam Newton", "Tom Brady", "Aaron Rodgers", "Drew Brees"];
 
           var a = $("<button>");
           a.addClass("player");
+          a.addClass("btn btn-primary");
           a.attr("data-name", quarterBacks[i]);
           a.text(quarterBacks[i]);
           $("#buttons-view").append(a);
